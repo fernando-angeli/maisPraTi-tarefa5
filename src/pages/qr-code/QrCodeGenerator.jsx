@@ -1,6 +1,6 @@
-import Container from "../container/Container";
-import Title from "../title/Title";
-import Input from "../input/Input";
+import Container from "../../components/container/Container";
+import Title from "../../components/title/Title";
+import Input from "../../components/input/Input";
 import styled from "styled-components";
 import { useState } from "react";
 import QRCodeCanvas from "qrcode.react";

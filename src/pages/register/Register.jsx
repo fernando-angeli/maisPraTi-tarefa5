@@ -1,11 +1,11 @@
 import styled from "styled-components";
-import Input from "../input/Input";
-import Button from "../button/Button";
+import Input from "../../components/input/Input";
+import Button from "../../components/button/Button";
 import { useState } from "react";
-import Title from "../title/Title";
-import Container from "../container/Container";
+import Title from "../../components/title/Title";
+import Container from "../../components/container/Container";
 import PersonIcon from "@mui/icons-material/person";
-import { createUser } from "../../database/database";
+import { createUser } from "../../database/Database";
 import { useNavigate } from "react-router-dom";
 
 const Form = styled.form`
