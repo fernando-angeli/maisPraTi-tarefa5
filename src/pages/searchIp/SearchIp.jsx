@@ -1,9 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
-import Title from "../title/Title";
-import Input from "../input/Input";
-import Button from "../button/Button";
-import Container from "../container/Container";
+import Title from "../../components/title/Title";
+import Input from "../../components/input/Input";
+import Button from "../../components/button/Button";
+import Container from "../../components/container/Container";
 import styled from "styled-components";
 
 const ResultSearchIp = styled.div`

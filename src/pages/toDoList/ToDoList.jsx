@@ -1,16 +1,16 @@
-import Container from "../container/Container";
-import Title from "../title/Title";
+import Container from "../../components/container/Container";
+import Title from "../../components/title/Title";
 import styled from "styled-components";
-import Input from "../input/Input";
-import { useState, useContext, useEffect } from "react";
-import Button from "../button/Button";
+import Input from "../../components/input/Input";
+import { useState, useEffect } from "react";
+import Button from "../../components/button/Button";
 import TaskCard from "./TaskCard";
 import {
   insertTaskDB,
   updateTaskDB,
   deleteTaskDB,
-} from "../../database/Database";
-import { AuthContext } from "../contexts/AuthContext";
+} from "../../database/database";
+import { useAuth } from "../../provider/authProvider";
 
 const Tasks = styled.div`
   display: flex;
@@ -45,7 +45,7 @@ const H2 = styled.h2`
 `;
 
 export default function ToDoList() {
-  const { loggedUser } = useContext(AuthContext);
+  const { loggedUser } = useAuth();
   const [task, setTask] = useState({
     id: "",
     complete: false,

@@ -1,11 +1,11 @@
 import { useState } from "react";
 import axios from "axios";
-import Title from "../title/Title";
+import Title from "../../components/title/Title";
 import styled from "styled-components";
-import Button from "../button/Button";
-import Container from "../container/Container";
+import Button from "../../components/button/Button";
+import Container from "../../components/container/Container";
 import GTranslateIcon from "@mui/icons-material/GTranslate";
-import TextArea from "../textArea/TextArea";
+import TextArea from "../../components/textArea/TextArea";
 
 const Label = styled.label`
   display: flex;

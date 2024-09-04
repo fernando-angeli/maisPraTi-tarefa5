@@ -2,8 +2,7 @@ import styled from "styled-components";
 import Title from "../title/Title";
 import Button from "../button/Button";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../contexts/AuthContext";
-import { useContext } from "react";
+import { useAuth } from "../../provider/authProvider";
 import LogoutIcon from "@mui/icons-material/Logout";
 
 const MenuContainer = styled.nav`
@@ -48,7 +47,7 @@ const StyledLink = styled(Link)`
 `;
 
 export default function Menu() {
-  const { loggedUser, logout } = useContext(AuthContext);
+  const { loggedUser, logout } = useAuth();
   return (
     <MenuContainer>
       <StyledLinkTitle to="/">

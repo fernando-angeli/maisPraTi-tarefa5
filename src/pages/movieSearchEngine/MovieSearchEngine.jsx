@@ -1,9 +1,9 @@
 import { useState } from "react";
 import axios from "axios";
-import Title from "../title/Title";
-import Button from "../button/Button";
-import Container from "../container/Container";
-import Input from "../input/Input";
+import Title from "../../components/title/Title";
+import Button from "../../components/button/Button";
+import Container from "../../components/container/Container";
+import Input from "../../components/input/Input";
 import MovieCard from "./MovieCard";
 import styled from "styled-components";
 

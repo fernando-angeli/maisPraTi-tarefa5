@@ -87,7 +87,7 @@ export function createUser(user) {
   }
 }
 
-export function loginUser(searchUser) {
+export function loginUserDB(searchUser) {
   let validateUser = "";
   const users = JSON.parse(database.findUsers());
   if (searchUser && users) {
