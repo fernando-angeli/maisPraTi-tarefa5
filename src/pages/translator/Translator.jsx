@@ -30,27 +30,31 @@ const Select = styled.select`
   margin-left: 0.5rem;
 `;
 
+const Error = styled.p`
+  color: red;
+`;
+
 function Translator() {
   const [text, setText] = useState("");
+  const [error, setError] = useState("");
   const [translatedText, setTranslatedText] = useState("");
   const [sourceLanguage, setSourceLanguage] = useState("pt-br");
   const [targetLanguage, setTargetLanguage] = useState("en");
 
+  const apiKey = `AIzaSyA2h1UIr66R2nh9iHlUjj90mRcjhD2O8Ek`;
+  const url = `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`;
   const translateText = async () => {
     try {
-      const response = await axios.get(
-        "https://api.mymemory.translated.net/get",
-        {
-          params: {
-            q: text,
-            langpair: `${sourceLanguage}|${targetLanguage}`,
-          },
-        }
-      );
-      setTranslatedText(response.data.responseData.translatedText);
+      const response = await axios.post(url, {
+        q: text,
+        source: sourceLanguage,
+        target: targetLanguage,
+        format: "text",
+      });
+      console.log("RESPONSE", response);
+      setTranslatedText(response.data.data.translations[0].translatedText);
     } catch (error) {
-      console.error("Erro ao traduzir o texto", error);
-      alert("Erro na requisição.");
+      setError("Erro na requisição\n", error.message);
     }
   };
 
@@ -83,7 +87,7 @@ function Translator() {
           <option value="fr">French</option>
           <option value="de">German</option>
           <option value="it">Italian</option>
-          <option value="pt-br">Portugueses</option>
+          <option value="pt-br">Portuguese</option>
         </Select>
       </Label>
 
@@ -94,6 +98,7 @@ function Translator() {
         onChange={(event) => setText(event.target.value)}
         placeholder="Digite o texto ou palavra para traduzir"
       />
+      {error && <Error>{error}</Error>}
       {translatedText && (
         <TextArea
           value={translatedText}
