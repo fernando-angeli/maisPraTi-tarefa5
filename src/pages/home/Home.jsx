@@ -6,7 +6,7 @@ export const Home = () => {
 
   return (
     <Container>
-      <h1>Bem Vindo {loggedUser.name}</h1>
+      <h1>Bem Vindo {loggedUser?.name || " Faça login"}</h1>
     </Container>
   );
 };
