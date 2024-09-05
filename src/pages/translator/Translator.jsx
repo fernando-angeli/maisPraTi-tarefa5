@@ -1,5 +1,4 @@
 import { useState } from "react";
-import axios from "axios";
 import Title from "../../components/title/Title";
 import styled from "styled-components";
 import Button from "../../components/button/Button";
@@ -12,7 +11,7 @@ const Label = styled.label`
   justify-content: end;
   align-items: center;
   padding: 0.5rem 1rem;
-  width: 300px;
+  width: 350px;
   color: black;
   height: 2.5rem;
   box-sizing: border-box;
@@ -30,27 +29,48 @@ const Select = styled.select`
   margin-left: 0.5rem;
 `;
 
+const Error = styled.p`
+  color: red;
+`;
+
 function Translator() {
   const [text, setText] = useState("");
+  const [error, setError] = useState("");
   const [translatedText, setTranslatedText] = useState("");
-  const [sourceLanguage, setSourceLanguage] = useState("pt-br");
   const [targetLanguage, setTargetLanguage] = useState("en");
 
+  const handleChange = (event) => {
+    setError("");
+    setText(event.target.value);
+  };
+
   const translateText = async () => {
+    const apiKey = "AIzaSyDoBQoa7Y614FYVEEyRHWgqmExRhS2djvs";
+    const url = `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`;
+
     try {
-      const response = await axios.get(
-        "https://api.mymemory.translated.net/get",
-        {
-          params: {
-            q: text,
-            langpair: `${sourceLanguage}|${targetLanguage}`,
-          },
-        }
-      );
-      setTranslatedText(response.data.responseData.translatedText);
+      if (!text) {
+        setError("Informe uma palavra ou texto pra traduzir.");
+      }
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          q: text,
+          target: targetLanguage,
+        }),
+      });
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error.message);
+      }
+      const data = await response.json();
+      setTranslatedText(data.data.translations[0].translatedText);
     } catch (error) {
-      console.error("Erro ao traduzir o texto", error);
-      alert("Erro na requisição.");
+      setError(`Erro na requisição: ${error.message}`);
+      setTranslatedText("");
     }
   };
 
@@ -58,22 +78,7 @@ function Translator() {
     <Container>
       <Title title="Tradução de textos" />
       <Label>
-        Traduzir de:
-        <Select
-          value={sourceLanguage}
-          onChange={(event) => setSourceLanguage(event.target.value)}
-        >
-          <option value="pt-br">Portuguese</option>
-          <option value="en">English</option>
-          <option value="es">Spanish</option>
-          <option value="fr">French</option>
-          <option value="de">German</option>
-          <option value="it">Italian</option>
-        </Select>
-      </Label>
-
-      <Label>
-        Para:
+        Selecione o idioma:
         <Select
           value={targetLanguage}
           onChange={(event) => setTargetLanguage(event.target.value)}
@@ -83,7 +88,7 @@ function Translator() {
           <option value="fr">French</option>
           <option value="de">German</option>
           <option value="it">Italian</option>
-          <option value="pt-br">Portugueses</option>
+          <option value="pt-br">Portuguese</option>
         </Select>
       </Label>
 
@@ -91,9 +96,10 @@ function Translator() {
         value={text}
         name="textInput"
         type="text"
-        onChange={(event) => setText(event.target.value)}
+        onChange={handleChange}
         placeholder="Digite o texto ou palavra para traduzir"
       />
+      {error && <Error>{error}</Error>}
       {translatedText && (
         <TextArea
           value={translatedText}
