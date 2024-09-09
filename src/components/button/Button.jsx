@@ -31,7 +31,7 @@ function Button(props) {
         width: `${props.width || `auto`}`,
         height: `${props.height}`,
         fontSize: `${props.fontSize}`,
-        marginTop: `${props.marginTop || 0}`,
+        margin: `${props.margin}`,
       }}
       disabled={props.disabled}
     >

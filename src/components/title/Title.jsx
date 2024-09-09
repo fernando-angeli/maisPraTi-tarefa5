@@ -10,7 +10,13 @@ const H1 = styled.h1`
 function Title(props) {
   return (
     <>
-      <H1>{props.title}</H1>
+      <H1
+        style={{
+          margin: `${props.margin || 0}`,
+        }}
+      >
+        {props.title}
+      </H1>
     </>
   );
 }
