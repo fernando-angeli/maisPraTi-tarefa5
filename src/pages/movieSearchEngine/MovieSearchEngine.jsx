@@ -17,6 +17,7 @@ const ButtonBox = styled.div`
   display: flex;
   justify-content: center;
 `;
+
 function MovieSearchEngine() {
   const [movie, setMovie] = useState([]);
   const [error, setError] = useState();
