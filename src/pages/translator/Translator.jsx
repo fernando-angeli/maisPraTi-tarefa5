@@ -5,6 +5,7 @@ import Button from "../../components/button/Button";
 import ContainerApp from "../../components/container/ContainerApp";
 import GTranslateIcon from "@mui/icons-material/GTranslate";
 import TextArea from "../../components/textArea/TextArea";
+import axios from "axios";
 
 const Label = styled.label`
   display: flex;
@@ -45,29 +46,18 @@ function Translator() {
   };
 
   const translateText = async () => {
-    const apiKey = "AIzaSyDoBQoa7Y614FYVEEyRHWgqmExRhS2djvs";
+    const apiKey = import.meta.env.VITE_TOKEN_API_TRANSLATOR_GOOGLE;
     const url = `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`;
 
     try {
       if (!text) {
         setError("Informe uma palavra ou texto pra traduzir.");
       }
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          q: text,
-          target: targetLanguage,
-        }),
+      const response = await axios.post(url, {
+        q: text,
+        target: targetLanguage,
       });
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error.message);
-      }
-      const data = await response.json();
-      setTranslatedText(data.data.translations[0].translatedText);
+      setTranslatedText(response.data.data.translations[0].translatedText);
     } catch (error) {
       setError(`Erro na requisição: ${error.message}`);
       setTranslatedText("");

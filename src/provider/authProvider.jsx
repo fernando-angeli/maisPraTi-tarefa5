@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { createContext, useContext, useMemo, useState, useEffect } from "react";
-import axios from "axios";
 
 const AuthContext = createContext();
 
@@ -17,10 +16,12 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+      //SE EXISTIR UM TOKEN VALIDO, O PASSARIAMOS POR DEFAULT PARA O AXIOS (CASO NECESSITE VARIAS REQUESTS NA MESMA API)
+      //axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       localStorage.setItem("token", token);
     } else {
-      delete axios.defaults.headers.common["Authorization"];
+      //CASO O TOKEN NÁO EXISTA ELE LIMPARIA O TOKEN DEFAULT DO AXIOS
+      //delete axios.defaults.headers.common["Authorization"];
       localStorage.removeItem("token");
     }
   }, [token]);
