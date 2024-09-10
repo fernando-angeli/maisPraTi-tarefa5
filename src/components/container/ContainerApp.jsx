@@ -8,13 +8,13 @@ const StyledContainer = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 1rem;
-  width: 80vw;
+  width: 90vw;
   background-color: ${(props) => props.backgroundColor || `#fff`};
   box-shadow: 5px 5px 10px gray;
   padding: 2rem;
 `;
 
-const Container = ({ backgroundColor, children }) => {
+const ContainerApp = ({ backgroundColor, children }) => {
   return (
     <StyledContainer backgroundColor={backgroundColor}>
       <Menu />
@@ -23,4 +23,4 @@ const Container = ({ backgroundColor, children }) => {
   );
 };
 
-export default Container;
+export default ContainerApp;

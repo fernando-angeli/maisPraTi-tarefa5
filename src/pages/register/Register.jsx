@@ -3,7 +3,7 @@ import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
 import { useState } from "react";
 import Title from "../../components/title/Title";
-import Container from "../../components/container/Container";
+import ContainerApp from "../../components/container/ContainerApp";
 import PersonIcon from "@mui/icons-material/person";
 import { createUser } from "../../database/Database";
 import { useNavigate } from "react-router-dom";
@@ -65,7 +65,7 @@ export default function Register() {
   };
 
   return (
-    <Container>
+    <ContainerApp>
       <Form onSubmit={handleSubmit}>
         <Title title="Registro de usuário" />
         <Input
@@ -110,6 +110,6 @@ export default function Register() {
           <PersonIcon />
         </Button>
       </Form>
-    </Container>
+    </ContainerApp>
   );
 }

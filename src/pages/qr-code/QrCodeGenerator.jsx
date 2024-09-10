@@ -1,4 +1,4 @@
-import Container from "../../components/container/Container";
+import ContainerApp from "../../components/container/ContainerApp";
 import Title from "../../components/title/Title";
 import Input from "../../components/input/Input";
 import styled from "styled-components";
@@ -15,7 +15,7 @@ const QRCodeContainer = styled.div`
 const QRCodeGenerator = () => {
   const [text, setText] = useState("");
   return (
-    <Container>
+    <ContainerApp>
       <Title title="QR Code Generator" />
       <Input
         type="text"
@@ -26,7 +26,7 @@ const QRCodeGenerator = () => {
       <QRCodeContainer>
         <QRCodeCanvas id="qrCode" value={text} bgColor={"#eee"} />
       </QRCodeContainer>
-    </Container>
+    </ContainerApp>
   );
 };
 

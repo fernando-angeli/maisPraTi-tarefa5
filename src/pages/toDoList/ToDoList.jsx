@@ -1,4 +1,4 @@
-import Container from "../../components/container/Container";
+import ContainerApp from "../../components/container/ContainerApp";
 import Title from "../../components/title/Title";
 import styled from "styled-components";
 import Input from "../../components/input/Input";
@@ -83,7 +83,7 @@ export default function ToDoList() {
   };
 
   return (
-    <Container>
+    <ContainerApp>
       <Title title="ToDo List" />
       <Tasks>
         <InsertTask>
@@ -128,6 +128,6 @@ export default function ToDoList() {
           <h2>Nenhuma tarefa criada.</h2>
         )}
       </Tasks>
-    </Container>
+    </ContainerApp>
   );
 }
