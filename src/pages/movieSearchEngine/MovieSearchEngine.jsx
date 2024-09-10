@@ -75,6 +75,12 @@ function MovieSearchEngine() {
   };
   */
 
+  const handleClear = () => {
+    setMovie([]);
+    setQuery("");
+    setError("");
+  };
+
   return (
     <ContainerApp>
       <Title title="Movies" />
@@ -98,7 +104,7 @@ function MovieSearchEngine() {
           <SearchIcon />
         </Button>
         <Button
-          onClick={() => setQuery("")}
+          onClick={handleClear}
           description="Limpar"
           border="1px solid"
           borderRadius="0.5rem"

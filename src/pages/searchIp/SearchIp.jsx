@@ -61,6 +61,7 @@ export default function SearchIp() {
   const handleClear = () => {
     setIp("");
     setResult("");
+    setError("");
   };
 
   return (

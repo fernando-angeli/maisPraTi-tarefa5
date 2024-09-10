@@ -8,10 +8,10 @@ import Button from "../../components/button/Button";
 import FormatClearIcon from "@mui/icons-material/FormatClear";
 
 const QRCodeContainer = styled.div`
-  max-width: 150px;
-  max-height: 150px;
+  max-width: auto;
+  max-height: auto;
   box-shadow: 5px 5px 15px gray;
-  padding: 1rem;
+  padding: 1rem 1rem;
 `;
 
 const QRCodeGenerator = () => {
@@ -26,7 +26,7 @@ const QRCodeGenerator = () => {
         placeholder="Digite para gerar um QRCode"
       />
       <QRCodeContainer>
-        <QRCodeCanvas id="qrCode" value={text} bgColor={"#eee"} />
+        <QRCodeCanvas id="qrCode" value={text} bgColor={"#fff"} size={200} />
       </QRCodeContainer>
       <Button
         onClick={() => setText("")}
