@@ -4,6 +4,14 @@ import styled from "styled-components";
 const CustomInput = styled.input`
   border-radius: 0.3rem;
   padding: 1rem;
+  width: calc(80% - 2rem);
+
+  @media (min-width: 992) {
+    width: ${(props) => (props.width ? props.width : `calc(80% - 2rem)`)};
+  }
+  @media (max-width: 991px) {
+    width: 100%;
+  }
 `;
 
 function Input(props) {
@@ -21,7 +29,6 @@ function Input(props) {
         margin: `${props.margin || `1rem 0`}`,
         textDecoration: `${props.textDecoration || `none`}`,
         fontWeight: `${props.fontWeight || 0}`,
-        width: `${props.width || `calc(80% - 2rem)`}`,
         height: `${props.height || `1.5rem`}`,
         backgroundColor: `${props.backgroundColor || `transparent`}`,
       }}

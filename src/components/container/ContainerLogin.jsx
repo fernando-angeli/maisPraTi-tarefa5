@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import styled from "styled-components";
-import Menu from "../menu/Menu";
 
 const StyledContainer = styled.div`
   display: flex;

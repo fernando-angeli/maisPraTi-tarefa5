@@ -3,7 +3,7 @@ import axios from "axios";
 import Title from "../../components/title/Title";
 import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
-import Container from "../../components/container/Container";
+import ContainerApp from "../../components/container/ContainerApp";
 import styled from "styled-components";
 
 const ResultSearchIp = styled.div`
@@ -36,7 +36,7 @@ export default function SearchIp() {
   };
 
   return (
-    <Container>
+    <ContainerApp>
       <Title title="Consulta de IP" />
       <Input
         type="text"
@@ -65,6 +65,6 @@ export default function SearchIp() {
           </P>
         )}
       </ResultSearchIp>
-    </Container>
+    </ContainerApp>
   );
 }

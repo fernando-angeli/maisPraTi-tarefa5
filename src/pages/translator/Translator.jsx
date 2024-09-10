@@ -2,7 +2,7 @@ import { useState } from "react";
 import Title from "../../components/title/Title";
 import styled from "styled-components";
 import Button from "../../components/button/Button";
-import Container from "../../components/container/Container";
+import ContainerApp from "../../components/container/ContainerApp";
 import GTranslateIcon from "@mui/icons-material/GTranslate";
 import TextArea from "../../components/textArea/TextArea";
 
@@ -75,7 +75,7 @@ function Translator() {
   };
 
   return (
-    <Container>
+    <ContainerApp>
       <Title title="Tradução de textos" />
       <Label>
         Selecione o idioma:
@@ -120,7 +120,7 @@ function Translator() {
       >
         <GTranslateIcon />
       </Button>
-    </Container>
+    </ContainerApp>
   );
 }
 

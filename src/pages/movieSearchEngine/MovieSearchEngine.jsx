@@ -2,17 +2,13 @@ import { useState } from "react";
 import axios from "axios";
 import Title from "../../components/title/Title";
 import Button from "../../components/button/Button";
-import Container from "../../components/container/Container";
+import ContainerApp from "../../components/container/ContainerApp";
 import Input from "../../components/input/Input";
 import MovieCard from "./MovieCard";
-import styled from "styled-components";
-
-const Movies = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  padding: 1rem;
-`;
+import SearchIcon from "@mui/icons-material/Search";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 function MovieSearchEngine() {
   const token =
@@ -40,10 +36,15 @@ function MovieSearchEngine() {
 
     axios
       .request(options)
-      .then(function (response) {
+      .then((response) => {
         setMovie(response.data.results);
+        setError(
+          response.data.results.length === 0
+            ? `Nenhum resultado para sua busca.`
+            : ""
+        );
       })
-      .catch(function (error) {
+      .catch((error) => {
         setError(error);
         console.error("Erro:" + error);
       });
@@ -70,7 +71,7 @@ function MovieSearchEngine() {
   */
 
   return (
-    <Container>
+    <ContainerApp>
       <Title title="Movies" />
       <Input
         type="text"
@@ -87,22 +88,37 @@ function MovieSearchEngine() {
         width="8rem"
         height="2.5rem"
         fontSize="1.1rem"
-      />
-      <Movies>
-        {movie &&
-          movie.map((m) => (
-            <MovieCard
-              key={m.id}
-              title={m.original_title}
-              date={m.release_date}
-              poster={`https://image.tmdb.org/t/p/original${m.backdrop_path}`}
-            />
-          ))}
-      </Movies>
+      >
+        <SearchIcon />
+      </Button>
+      <Container>
+        <Row>
+          {movie &&
+            movie.map((m) => (
+              <Col
+                xs={12}
+                sm={8}
+                md={8}
+                lg={5}
+                xl={4}
+                xxl={3}
+                className="d-flex f-column justify-content-center align-items-center mb-3"
+                key={m.id}
+              >
+                <MovieCard
+                  key={m.id}
+                  title={m.original_title}
+                  date={m.release_date}
+                  poster={`https://image.tmdb.org/t/p/original${m.backdrop_path}`}
+                />
+              </Col>
+            ))}
+        </Row>
+      </Container>
       <div className="error" style={{ color: "red" }}>
         {error}
       </div>
-    </Container>
+    </ContainerApp>
   );
 }
 
