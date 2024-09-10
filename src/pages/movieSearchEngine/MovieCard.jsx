@@ -12,7 +12,7 @@ const Container = styled.div`
   border-radius: 10px;
   background-color: #fff;
   margin: 1rem;
-  box-shadow: 8px 8px 12px rgba(0, 0, 0, 0.2);b
+  box-shadow: 8px 8px 12px rgba(0, 0, 0, 0.2);
 `;
 
 const Img = styled.img`

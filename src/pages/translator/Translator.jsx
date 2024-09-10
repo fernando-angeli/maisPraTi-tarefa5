@@ -4,19 +4,20 @@ import styled from "styled-components";
 import Button from "../../components/button/Button";
 import ContainerApp from "../../components/container/ContainerApp";
 import GTranslateIcon from "@mui/icons-material/GTranslate";
+import FormatClearIcon from "@mui/icons-material/FormatClear";
 import TextArea from "../../components/textArea/TextArea";
 import axios from "axios";
 
 const Label = styled.label`
   display: flex;
-  justify-content: end;
+  justify-content: center;
   align-items: center;
   padding: 0.5rem 1rem;
   width: 350px;
   color: black;
   height: 2.5rem;
   box-sizing: border-box;
-  margin-bottom: 1rem;
+  margin: 1rem 0;
   font-size: 1.1rem;
 `;
 
@@ -28,6 +29,12 @@ const Select = styled.select`
   font-size: 1rem;
   height: 2rem;
   margin-left: 0.5rem;
+`;
+
+const ButtonBox = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
 `;
 
 const Error = styled.p`
@@ -45,13 +52,20 @@ function Translator() {
     setText(event.target.value);
   };
 
+  const handleClear = () => {
+    setText("");
+    setTranslatedText("");
+  };
+
   const translateText = async () => {
     const apiKey = import.meta.env.VITE_TOKEN_API_TRANSLATOR_GOOGLE;
     const url = `https://translation.googleapis.com/language/translate/v2?key=${apiKey}`;
 
     try {
-      if (!text) {
+      if (!text.trim()) {
         setError("Informe uma palavra ou texto pra traduzir.");
+        setTranslatedText("");
+        return;
       }
       const response = await axios.post(url, {
         q: text,
@@ -88,6 +102,7 @@ function Translator() {
         type="text"
         onChange={handleChange}
         placeholder="Digite o texto ou palavra para traduzir"
+        margin="0 0 1rem 0"
       />
       {error && <Error>{error}</Error>}
       {translatedText && (
@@ -96,20 +111,38 @@ function Translator() {
           readOnly
           color="green"
           border="1px solid green"
+          margin="0 0 1rem 0"
         />
       )}
-      <Button
-        onClick={translateText}
-        description="Traduzir"
-        border="1px solid"
-        borderRadius="0.5rem"
-        textColor="white"
-        width="8rem"
-        height="2.5rem"
-        fontSize="1rem"
-      >
-        <GTranslateIcon />
-      </Button>
+      <ButtonBox>
+        <Button
+          onClick={translateText}
+          description="Traduzir"
+          border="1px solid"
+          borderRadius="0.5rem"
+          textColor="white"
+          width="8rem"
+          height="2.5rem"
+          fontSize="1rem"
+          margin="0 0.5rem 0 0"
+        >
+          <GTranslateIcon />
+        </Button>
+        <Button
+          onClick={handleClear}
+          description="Limpar"
+          border="1px solid"
+          borderRadius="0.5rem"
+          textColor="white"
+          width="8rem"
+          height="2.5rem"
+          fontSize="1rem"
+          backgroundColor="red"
+          margin="0 0 0 0.5rem"
+        >
+          <FormatClearIcon />
+        </Button>
+      </ButtonBox>
     </ContainerApp>
   );
 }

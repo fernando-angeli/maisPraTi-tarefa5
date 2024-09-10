@@ -4,6 +4,8 @@ import Input from "../../components/input/Input";
 import styled from "styled-components";
 import { useState } from "react";
 import QRCodeCanvas from "qrcode.react";
+import Button from "../../components/button/Button";
+import FormatClearIcon from "@mui/icons-material/FormatClear";
 
 const QRCodeContainer = styled.div`
   max-width: 150px;
@@ -26,6 +28,20 @@ const QRCodeGenerator = () => {
       <QRCodeContainer>
         <QRCodeCanvas id="qrCode" value={text} bgColor={"#eee"} />
       </QRCodeContainer>
+      <Button
+        onClick={() => setText("")}
+        description="Limpar"
+        border="1px solid"
+        borderRadius="0.5rem"
+        textColor="white"
+        width="8rem"
+        height="2.5rem"
+        fontSize="1rem"
+        backgroundColor="red"
+        margin="1.5rem 0 0 0"
+      >
+        <FormatClearIcon />
+      </Button>
     </ContainerApp>
   );
 };

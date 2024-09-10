@@ -2,20 +2,28 @@
 import styled from "styled-components";
 
 const TextAreaStyled = styled.textarea`
-  overflow: hidden;
+  overflow: auto;
   resize: none;
-  height: 3rem;
+  height: 4rem;
+  width: calc(80% - 2rem);
+
+  @media (min-width: 992px) {
+    width: ${(props) => (props.width ? props.width : `calc(80% - 2rem)`)};
+  }
+  @media (max-width: 991px) {
+    width: 100%;
+    height: 10rem;
+  }
 `;
 
 export default function TextArea(props) {
   return (
     <TextAreaStyled
       style={{
-        width: `${props.width || `calc(80% - 2rem)`}`,
         backgroundColor: `${props.backgroundColor || `transparent`}`,
         border: `${props.border || `1px solid gray`}`,
         borderRadius: `0.3rem`,
-        margin: `${props.margin || `1rem 0`}`,
+        margin: `${props.margin}`,
         padding: `1rem`,
         textDecoration: `${props.textDecoration || `none`}`,
         fontWeight: `${props.fontWeight || 0}`,
