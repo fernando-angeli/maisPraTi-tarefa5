@@ -11,12 +11,10 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 function MovieSearchEngine() {
-  const token =
-    "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJhNmNmZDNmOWNjMzNlMzFhNDg4YmNhOWU2NmY5NTA4OSIsIm5iZiI6MTcyMzgyODE1NC4xNTYxNzgsInN1YiI6IjY2YmY4NjEyMjJmYjI4MDNkMzQ4OWIxZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.fhWb_m2wxLUrpNpumHJUFCRqLvc7P8zwf_tN_r22KZ0";
-
   const [movie, setMovie] = useState([]);
   const [error, setError] = useState();
   const [query, setQuery] = useState("");
+  const token = import.meta.env.VITE_TOKEN_API_TMDB;
 
   const searchMovies = async () => {
     const options = {
@@ -44,9 +42,8 @@ function MovieSearchEngine() {
             : ""
         );
       })
-      .catch((error) => {
-        setError(error);
-        console.error("Erro:" + error);
+      .catch((err) => {
+        setError(err.message);
       });
   };
 
