@@ -6,10 +6,17 @@ import ContainerApp from "../../components/container/ContainerApp";
 import Input from "../../components/input/Input";
 import MovieCard from "./MovieCard";
 import SearchIcon from "@mui/icons-material/Search";
+import FormatClearIcon from "@mui/icons-material/FormatClear";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import styled from "styled-components";
 
+const ButtonBox = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`;
 function MovieSearchEngine() {
   const [movie, setMovie] = useState([]);
   const [error, setError] = useState();
@@ -76,18 +83,34 @@ function MovieSearchEngine() {
         onChange={(event) => setQuery(event.target.value)}
         placeholder="Informe um filme para pesquisar"
       />
-      <Button
-        onClick={searchMovies}
-        description="Buscar"
-        border="1px solid"
-        borderRadius="0.5rem"
-        textColor="white"
-        width="8rem"
-        height="2.5rem"
-        fontSize="1.1rem"
-      >
-        <SearchIcon />
-      </Button>
+      <ButtonBox>
+        <Button
+          onClick={searchMovies}
+          description="Buscar"
+          border="1px solid"
+          borderRadius="0.5rem"
+          textColor="white"
+          width="8rem"
+          height="2.5rem"
+          fontSize="1.1rem"
+        >
+          <SearchIcon />
+        </Button>
+        <Button
+          onClick={() => setQuery("")}
+          description="Limpar"
+          border="1px solid"
+          borderRadius="0.5rem"
+          textColor="white"
+          width="8rem"
+          height="2.5rem"
+          fontSize="1rem"
+          backgroundColor="red"
+          margin="0 0 0 0.5rem"
+        >
+          <FormatClearIcon />
+        </Button>
+      </ButtonBox>
       <Container>
         <Row>
           {movie &&
