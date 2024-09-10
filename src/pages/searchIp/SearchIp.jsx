@@ -7,31 +7,46 @@ import ContainerApp from "../../components/container/ContainerApp";
 import styled from "styled-components";
 
 const ResultSearchIp = styled.div`
+  width: calc(80% - 2rem);
   font-size: 0.9rem;
   border: 1px solid lightgray;
   border-radius: 5px;
   margin-top: 1rem;
+
+  @media (max-width: 991px) {
+    width: 100%;
+  }
 `;
 
 const P = styled.div`
   padding: 1rem;
 `;
 
+const Error = styled.p`
+  color: red;
+  padding: 1rem;
+`;
+
 export default function SearchIp() {
   const [ip, setIp] = useState("");
   const [result, setResult] = useState("");
+  const [error, setError] = useState("");
+  const token = import.meta.env.VITE_TOKEN_API_SEARCH_IP;
 
   const searchIp = async () => {
     axios
-      .get(`https://ipinfo.io/${ip}/json`)
+      .get(`https://ipinfo.io/${ip}/json?token=${token}`)
       .then((response) => {
+        if (!response.data.loc) {
+          setResult("");
+          return setError("Não localizado.");
+        }
         setResult(response.data);
-        setIp("");
+        setError("");
       })
       .catch((error) => {
-        console.error("Error:" + error);
-        setIp("");
-        setResult();
+        setResult("");
+        setError("Error:" + error);
       });
   };
 
@@ -54,6 +69,7 @@ export default function SearchIp() {
         height="2.5rem"
         fontSize="1.1rem"
       />
+      {import.meta.env.VITE_API_KEY}
       <ResultSearchIp>
         {result && (
           <P>
@@ -64,6 +80,7 @@ export default function SearchIp() {
             <p>Localização: {result.loc}</p>
           </P>
         )}
+        {error && <Error>{error}</Error>}
       </ResultSearchIp>
     </ContainerApp>
   );
