@@ -10,16 +10,47 @@ import { useState } from "react";
 const Tasks = styled.div`
   width: 100%;
   display: grid;
-  grid-template-columns: 0.5fr 4fr 0.5fr;
+  grid-template-columns: 2rem 4fr 0.5fr;
   text-align: center;
-  height: 3.5rem;
+  height: 3rem;
   align-items: center;
-  margin-top: 1rem;
+  margin-top: 0.9rem;
 `;
 
-const Checkbox = styled.input`
-  width: 100%;
-  height: 1.5rem;
+const CheckboxContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+`;
+
+const Checkbox = styled.input.attrs({ type: "checkbox" })`
+  width: 1.2rem;
+  height: 1.2rem;
+  cursor: pointer;
+  appearance: none; /* Remove o estilo padrão do checkbox */
+  -webkit-appearance: none; /* Para Safari/Chrome */
+  border: 1px solid #ccc; /* Define a borda do checkbox */
+  border-radius: 0.2rem; /* Arredonda as bordas */
+  background-color: white; /* Cor de fundo desmarcado */
+  display: inline-block;
+  position: relative;
+  outline: none; /* Remove o outline ao focar */
+
+  /* Adiciona o símbolo ✓ quando o checkbox está marcado */
+  &:checked::after {
+    content: "✓";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #0e7604; /* Cor da marca de verificação */
+    font-size: 1.8rem; /* Tamanho da marca */
+    font-weight: bold;
+  }
 `;
 
 const Actions = styled.div`
@@ -48,12 +79,14 @@ export default function TaskCard({ task, onUpdateTask, onDelete }) {
     <Tasks
       style={{ backgroundColor: complete ? "#A8E9D1" : "rgb(233, 231, 138)" }}
     >
-      <Checkbox
-        type="checkbox"
-        checked={complete}
-        onChange={handleCheckboxChange}
-        disabled={isEdit}
-      />
+      <CheckboxContainer>
+        <Checkbox
+          type="checkbox"
+          checked={complete}
+          onChange={handleCheckboxChange}
+          disabled={isEdit}
+        />
+      </CheckboxContainer>
       <Input
         type="text"
         value={description}
@@ -67,6 +100,8 @@ export default function TaskCard({ task, onUpdateTask, onDelete }) {
         textDecoration={complete ? "line-through" : "none"}
         fontWeight={complete ? "0" : "600"}
         onChange={(e) => setDescription(e.target.value)}
+        outline="none"
+        cursor={isEdit ? "pointer" : ""}
       />
       {!complete && (
         <Actions>

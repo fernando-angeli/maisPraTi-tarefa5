@@ -1,52 +1,70 @@
 /* eslint-disable react/prop-types */
 import styled from "styled-components";
+import defaultPoster from "../../assets/img/default.png";
 
 const Container = styled.div`
   padding: 0.5rem;
-  width: 250px;
-  height: 280px;
+  min-height: 260px;
+  min-width: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  border-radius: 10px;
+  border-radius: 15px;
   background-color: #fff;
   margin: 1rem;
-  box-shadow: 8px 8px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
 `;
 
 const Img = styled.img`
-  max-width: 250px;
-  width: auto;
-  border-radius: 8px;
+  max-width: 100%;
+  border-radius: 10px;
+  object-fit: cover;
 `;
 
 const Text = styled.div`
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-  height: 40%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  margin-left: 1rem;
-  margin-right: 1rem;
   text-align: center;
+  margin-top: 0.5rem;
 `;
 
-const H2 = styled.h2`
+const Name = styled.h2`
   margin: 0;
-  padding: 0;
-  font-size: 0.8rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
 `;
 
-function MovieCard(props) {
+const Date = styled.p`
+  margin: 0.5rem 0 0;
+  font-size: 0.9rem;
+  color: #555;
+`;
+
+function MovieCard({ poster, title, date }) {
+  const noImage = `https://image.tmdb.org/t/p/originalnull`;
+
   return (
     <Container>
-      <Img src={props.poster} alt="" />
+      <Img
+        src={poster !== noImage ? poster : defaultPoster}
+        alt={`Poster do filme ${title}`}
+      />
       <Text>
-        <H2>{props.title}</H2>
-        <H2>{props.date}</H2>
+        <Name>{title}</Name>
+        <Date>{date}</Date>
       </Text>
     </Container>
   );

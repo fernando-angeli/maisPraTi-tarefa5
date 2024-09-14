@@ -13,9 +13,12 @@ import Col from "react-bootstrap/Col";
 import styled from "styled-components";
 
 const ButtonBox = styled.div`
-  width: 100%;
+  width: 90%;
   display: flex;
   justify-content: center;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid gray;
 `;
 
 function MovieSearchEngine() {
@@ -89,6 +92,7 @@ function MovieSearchEngine() {
         value={query}
         onChange={(event) => setQuery(event.target.value)}
         placeholder="Informe um filme para pesquisar"
+        width="90%"
       />
       <ButtonBox>
         <Button
@@ -118,17 +122,17 @@ function MovieSearchEngine() {
           <FormatClearIcon />
         </Button>
       </ButtonBox>
-      <Container>
-        <Row>
+      <Container style={{ overflowY: "auto" }}>
+        <Row className="justify-content-space-beetween gx-4">
           {movie &&
             movie.map((m) => (
               <Col
                 xs={12}
-                sm={8}
-                md={8}
-                lg={5}
-                xl={4}
-                xxl={3}
+                sm={6}
+                md={4}
+                lg={3}
+                xl={3}
+                xxl={2}
                 className="d-flex f-column justify-content-center align-items-center mb-3"
                 key={m.id}
               >

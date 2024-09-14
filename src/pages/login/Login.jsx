@@ -7,7 +7,7 @@ import ContainerLogin from "../../components/container/ContainerLogin";
 import PersonIcon from "@mui/icons-material/person";
 import { useAuth } from "../../provider/authProvider";
 import { Link, useNavigate } from "react-router-dom";
-import { loginUserDB } from "../../database/Database";
+import { loginUserDB } from "../../database/Database.jsx";
 
 const Form = styled.form`
   width: 350px;
@@ -15,11 +15,10 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
 `;
 
 const Error = styled.div`
-  height: 1rem;
   color: red;
 `;
 
@@ -83,7 +82,7 @@ function Login() {
   return (
     <ContainerLogin>
       <Form onSubmit={handleSubmit}>
-        <Title title="Login de usuário" />
+        <Title title="Login de usuário" margin="1rem 0" />
         <Input
           type="text"
           name="username"
@@ -98,7 +97,6 @@ function Login() {
           value={user.password}
           onChange={handleChange}
           placeholder="Senha"
-          readOnly={false}
         />
         <Error>{passwordError && passwordError}</Error>
         <Button
@@ -110,15 +108,15 @@ function Login() {
           height="2.5rem"
           fontSize="1.1rem"
           type="submit"
-          marginTop="25px"
+          margin="1.5rem"
         >
           <PersonIcon />
         </Button>
+        <p>
+          Ainda não tem cadastro?
+          <StyledLink to="/register"> Clique aqui.</StyledLink>
+        </p>
       </Form>
-      <p>
-        Ainda não tem cadastro?
-        <StyledLink to="/register"> Clique aqui.</StyledLink>
-      </p>
     </ContainerLogin>
   );
 }

@@ -9,10 +9,10 @@ const ButtonContent = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
+  font-weight: 500;
 `;
 
 const ButtonIcon = styled.div`
-  margin-right: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -32,12 +32,13 @@ function Button(props) {
         height: `${props.height}`,
         fontSize: `${props.fontSize}`,
         margin: `${props.margin}`,
+        padding: `${props.padding}`,
       }}
       disabled={props.disabled}
     >
       <ButtonContent>
         {props.children && <ButtonIcon>{props.children}</ButtonIcon>}
-        {props.description}
+        {props.description && props.description}
       </ButtonContent>
     </ContainerButton>
   );

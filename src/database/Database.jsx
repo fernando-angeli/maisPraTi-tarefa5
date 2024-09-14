@@ -23,7 +23,7 @@ class Database {
   }
 
   updateUser(updatedUser) {
-    let usersStorage = JSON.parse(localStorage.getItem("users"));
+    let usersStorage = JSON.parse(this.findUsers());
     usersStorage = usersStorage.map((user) =>
       user.id === updatedUser.id ? updatedUser : user
     );
@@ -34,27 +34,42 @@ class Database {
     return localStorage.getItem("users");
   }
 
-  insertTask(user, newTask) {
+  findUserById(userId) {
+    const usersStorage = JSON.parse(this.findUsers());
+    const user = usersStorage.find((u) => u.id === userId);
+    return user ? user : null;
+  }
+
+  insertTask(userId, newTask) {
     const id = getNextTaskId();
     localStorage.setItem("id_task", id);
     newTask.id = id;
+    let user = this.findUserById(userId);
     user.tasks.push(newTask);
     this.updateUser(user);
     return newTask;
   }
 
-  updateTask(user, updatedTask) {
+  updateTask(userId, updatedTask) {
+    let user = this.findUserById(userId);
     user.tasks = user.tasks.map((task) =>
       task.id === updatedTask.id ? updatedTask : task
     );
     this.updateUser(user);
   }
 
-  deleteTask(user, deleteTaskId) {
+  deleteTask(userId, deleteTaskId) {
+    let user = this.findUserById(userId);
     user.tasks = user.tasks.filter((task) => task.id !== deleteTaskId);
     this.updateUser(user);
   }
+
+  getTasksByUserId(userId) {
+    const user = this.findUserById(userId);
+    return user ? user.tasks : [];
+  }
 }
+
 const database = new Database();
 
 class User {
@@ -89,7 +104,7 @@ export function createUser(user) {
 
 export function loginUserDB(searchUser) {
   let validateUser = "";
-  const users = JSON.parse(database.findUsers());
+  let users = JSON.parse(database.findUsers());
   if (searchUser && users) {
     users.forEach((user) => {
       if (
@@ -107,9 +122,13 @@ export function insertTaskDB(user, task) {
 }
 
 export function updateTaskDB(user, task) {
-  database.updateTask(user, task);
+  return database.updateTask(user, task);
 }
 
 export function deleteTaskDB(user, deleteTaskId) {
   database.deleteTask(user, deleteTaskId);
+}
+
+export function getTasksUserByUserId(userId) {
+  return database.getTasksByUserId(userId);
 }

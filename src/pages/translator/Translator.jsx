@@ -103,6 +103,7 @@ function Translator() {
         onChange={handleChange}
         placeholder="Digite o texto ou palavra para traduzir"
         margin="0 0 1rem 0"
+        height="10rem"
       />
       {error && <Error>{error}</Error>}
       {translatedText && (

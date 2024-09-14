@@ -9,7 +9,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import FormatClearIcon from "@mui/icons-material/FormatClear";
 
 const ResultSearchIp = styled.div`
-  width: calc(80% - 2rem);
+  width: 90%;
   font-size: 0.9rem;
   border: 1px solid lightgray;
   border-radius: 5px;
@@ -72,6 +72,7 @@ export default function SearchIp() {
         value={ip}
         onChange={(event) => setIp(event.target.value)}
         placeholder="Informe um IP para pesquisar"
+        width="90%"
       />
       <ButtonBox>
         <Button

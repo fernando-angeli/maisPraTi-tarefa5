@@ -6,8 +6,9 @@ const StyledContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-radius: 1rem;
-  width: 80vw;
+  border-radius: 0.8rem;
+  width: 90vw;
+  height: 90vh;
   background-color: ${(props) => props.backgroundColor || `#fff`};
   box-shadow: 5px 5px 10px gray;
   padding: 2rem;

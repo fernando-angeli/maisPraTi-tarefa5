@@ -24,6 +24,7 @@ const QRCodeGenerator = () => {
         value={text}
         onChange={(event) => setText(event.target.value)}
         placeholder="Digite para gerar um QRCode"
+        width="90%"
       />
       <QRCodeContainer>
         <QRCodeCanvas id="qrCode" value={text} bgColor={"#fff"} size={200} />

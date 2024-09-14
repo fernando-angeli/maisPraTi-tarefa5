@@ -4,7 +4,7 @@ import styled from "styled-components";
 const H1 = styled.h1`
   color: #253f58;
   font-family: Impact, sans-serif;
-  font-weight: 100;
+  font-size: ${(props) => props.fontSize || `1.8rem`};
 `;
 
 function Title(props) {
@@ -12,7 +12,8 @@ function Title(props) {
     <>
       <H1
         style={{
-          margin: `${props.margin || 0}`,
+          margin: `${props.margin || "1rem 0"}`,
+          fontSize: `${props.fontSize}`,
         }}
       >
         {props.title}

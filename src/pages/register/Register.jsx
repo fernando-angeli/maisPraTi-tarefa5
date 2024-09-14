@@ -7,6 +7,8 @@ import ContainerApp from "../../components/container/ContainerApp";
 import PersonIcon from "@mui/icons-material/person";
 import { createUser } from "../../database/Database";
 import { useNavigate } from "react-router-dom";
+import Toast from "react-bootstrap/Toast";
+import ToastContainer from "react-bootstrap/ToastContainer";
 
 const Form = styled.form`
   width: 350px;
@@ -14,12 +16,37 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
 `;
 
 const Error = styled.div`
   height: 1rem;
   color: red;
+`;
+
+const StyledToast = styled(Toast)`
+  .toast-body {
+    position: relative;
+    background-color: #28a745; /* Cor inicial verde */
+    color: white;
+    overflow: hidden;
+  }
+
+  .toast-body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: #155724; /* Cor final verde escuro */
+    transition: width 3s ease-in-out; /* Animação de preenchimento */
+    z-index: 1;
+  }
+
+  .toast-body.active::before {
+    width: 0;
+  }
 `;
 
 export default function Register() {
@@ -32,6 +59,7 @@ export default function Register() {
   const [nameError, setNameError] = useState("");
   const [userError, setUserError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [showToast, setShowToast] = useState(false);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -42,8 +70,12 @@ export default function Register() {
     event.preventDefault();
     if (validateForm()) {
       createUser(user);
-      setUser("");
-      navigate("/");
+      setUser({ name: "", username: "", password: "" }); // Limpa os campos
+      setShowToast(true); // Exibe o Toast
+      setTimeout(() => {
+        setShowToast(false); // Esconde o Toast
+        navigate("/"); // Redireciona para a página de login
+      }, 3000);
     }
   };
 
@@ -105,11 +137,23 @@ export default function Register() {
           height="2.5rem"
           fontSize="1.1rem"
           type="submit"
-          marginTop="25px"
+          margin="1.5rem"
         >
           <PersonIcon />
         </Button>
       </Form>
+      <ToastContainer position="top-end" className="p-3">
+        <StyledToast
+          show={showToast}
+          onClose={() => setShowToast(false)}
+          delay={3000}
+          autohide
+        >
+          <Toast.Body className={showToast ? "active" : ""}>
+            Cadastro realizado com sucesso!
+          </Toast.Body>
+        </StyledToast>
+      </ToastContainer>
     </ContainerApp>
   );
 }
