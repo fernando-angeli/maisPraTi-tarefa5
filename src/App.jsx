@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Routes from "./routes";
-import AuthProvider from "./provider/AuthProvider";
+import AuthProvider from "./provider/authProvider.jsx";
 
 const AppContainer = styled.div`
   background-color: #ececf0;

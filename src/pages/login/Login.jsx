@@ -5,7 +5,7 @@ import { useState } from "react";
 import Title from "../../components/title/Title";
 import ContainerLogin from "../../components/container/ContainerLogin";
 import PersonIcon from "@mui/icons-material/person";
-import { useAuth } from "../../provider/authProvider";
+import { useAuth } from "../../provider/authProvider.jsx";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUserDB } from "../../database/Database.jsx";
 
