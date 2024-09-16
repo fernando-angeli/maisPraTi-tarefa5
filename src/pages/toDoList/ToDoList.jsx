@@ -12,7 +12,7 @@ import {
   updateTaskDB,
   deleteTaskDB,
   getTasksUserByUserId,
-} from "../../database/database";
+} from "../../database/Database";
 import { useAuth } from "../../provider/authProvider";
 
 const Tasks = styled.div`
