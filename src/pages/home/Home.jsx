@@ -35,7 +35,8 @@ const UserName = styled.span`
   color: #ffde59;
   margin-left: 0.5rem;
 `;
-export const Home = () => {
+
+const Home = () => {
   const { loggedUser } = useAuth();
 
   return (
@@ -46,3 +47,5 @@ export const Home = () => {
     </ContainerApp>
   );
 };
+
+export default Home;

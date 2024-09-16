@@ -6,7 +6,7 @@ import Title from "../../components/title/Title";
 import ContainerApp from "../../components/container/ContainerApp";
 import PersonIcon from "@mui/icons-material/person";
 import { createUser } from "../../database/Database";
-import { useNavigate } from "react-router-dom";
+import { defer, useNavigate } from "react-router-dom";
 import Toast from "react-bootstrap/Toast";
 import ToastContainer from "react-bootstrap/ToastContainer";
 
@@ -49,7 +49,7 @@ const StyledToast = styled(Toast)`
   }
 `;
 
-export default function Register() {
+const Register = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState({
     name: "",
@@ -156,4 +156,6 @@ export default function Register() {
       </ToastContainer>
     </ContainerApp>
   );
-}
+};
+
+export default Register;

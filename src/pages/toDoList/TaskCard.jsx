@@ -59,7 +59,7 @@ const Actions = styled.div`
   justify-content: space-evenly;
 `;
 
-export default function TaskCard({ task, onUpdateTask, onDelete }) {
+const TaskCard = ({ task, onUpdateTask, onDelete }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [complete, setComplete] = useState(task.complete ?? false);
   const [description, setDescription] = useState(task.description);
@@ -134,4 +134,6 @@ export default function TaskCard({ task, onUpdateTask, onDelete }) {
       )}
     </Tasks>
   );
-}
+};
+
+export default TaskCard;

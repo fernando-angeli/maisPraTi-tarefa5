@@ -8,7 +8,7 @@ import MovieSearchEngine from "../pages/movieSearchEngine/MovieSearchEngine";
 import QRCodeGenerator from "../pages/qr-code/QrCodeGenerator";
 import SearchIp from "../pages/searchIp/SearchIp";
 import ToDoList from "../pages/toDoList/ToDoList";
-import { Home } from "../pages/home/home";
+import Home from "../pages/home/Home";
 
 const Routes = () => {
   const { token } = useAuth();

@@ -41,7 +41,7 @@ const Error = styled.p`
   color: red;
 `;
 
-function Translator() {
+const Translator = () => {
   const [text, setText] = useState("");
   const [error, setError] = useState("");
   const [translatedText, setTranslatedText] = useState("");
@@ -146,6 +146,6 @@ function Translator() {
       </ButtonBox>
     </ContainerApp>
   );
-}
+};
 
 export default Translator;

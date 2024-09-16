@@ -113,7 +113,7 @@ const H3 = styled.h3`
   margin-top: 1rem;
 `;
 
-export default function ToDoList() {
+const ToDoList = () => {
   const { loggedUser } = useAuth();
   const [task, setTask] = useState({
     id: "",
@@ -220,4 +220,6 @@ export default function ToDoList() {
       </Tasks>
     </ContainerApp>
   );
-}
+};
+
+export default ToDoList;

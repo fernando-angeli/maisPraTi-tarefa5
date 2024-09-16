@@ -35,7 +35,7 @@ const ButtonBox = styled.div`
   justify-content: center;
 `;
 
-export default function SearchIp() {
+const SearchIp = () => {
   const [ip, setIp] = useState("");
   const [result, setResult] = useState("");
   const [error, setError] = useState("");
@@ -116,4 +116,6 @@ export default function SearchIp() {
       </ResultSearchIp>
     </ContainerApp>
   );
-}
+};
+
+export default SearchIp;

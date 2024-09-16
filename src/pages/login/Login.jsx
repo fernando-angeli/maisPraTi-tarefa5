@@ -29,7 +29,7 @@ const StyledLink = styled(Link)`
   font-weight: bold;
 `;
 
-function Login() {
+const Login = () => {
   const { setToken, logout, loginUser } = useAuth();
   const navigate = useNavigate();
 
@@ -119,6 +119,6 @@ function Login() {
       </Form>
     </ContainerLogin>
   );
-}
+};
 
 export default Login;
